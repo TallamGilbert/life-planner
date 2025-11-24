@@ -22,9 +22,11 @@
             
             <!-- Success Message -->
             @if(session('success'))
-                <div class="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
-                    {{ session('success') }}
-                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        showToast('{{ session('success') }}', 'success');
+                    });
+                </script>
             @endif
 
             <!-- Bill Overview -->
@@ -56,10 +58,10 @@
                             <span>Progress: {{ $bill->paid_installments }} / {{ $bill->total_installments }} payments</span>
                             <span>{{ $bill->progress_percentage }}%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-4">
-                            <div class="bg-gradient-to-r from-blue-500 to-green-500 h-4 rounded-full transition-all" 
-                                 style="width: {{ $bill->progress_percentage }}%"></div>
-                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full progress-bar" 
+                                    style="width: {{ $bill->progress_percentage }}%"></div>
+                            </div>
                     </div>
 
                     <!-- Bill Details Grid -->
@@ -160,7 +162,7 @@
                             </div>
 
                             <button type="submit" 
-                                    class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
                                 Record Payment
                             </button>
                         </form>

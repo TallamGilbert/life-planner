@@ -15,13 +15,14 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             
-            <!-- Success Message -->
+                        <!-- Success Message -->
             @if(session('success'))
-                <div class="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
-                    {{ session('success') }}
-                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        showToast('{{ session('success') }}', 'success');
+                    });
+                </script>
             @endif
-
             <!-- Summary Cards -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 @php
@@ -83,10 +84,10 @@
                                             <span>{{ $bill->progress_percentage }}%</span>
                                         </div>
                                         <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-blue-600 h-2 rounded-full" 
-                                                 style="width: {{ $bill->progress_percentage }}%"></div>
+                                            <div class="bg-blue-600 h-2 rounded-full progress-bar" 
+                                                style="width: {{ $bill->progress_percentage }}%"></div>
                                         </div>
-                                    </div>
+                                     </div>
 
                                     <!-- Details -->
                                     <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm mb-3">

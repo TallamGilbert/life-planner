@@ -28,6 +28,67 @@
 <!-- Viewport for mobile -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+
+<style>
+    /* Page Load Animation */
+    body:not(.loaded) main {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    
+    body.loaded main {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Smooth Transitions */
+    * {
+        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+    }
+
+    /* Card Hover Effects */
+    .card-hover {
+        transition: all 0.3s ease;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Progress Bar Animation */
+    @keyframes progress {
+        from { width: 0; }
+    }
+
+    .progress-bar {
+        animation: progress 1s ease-out;
+    }
+
+    /* Pulse Animation */
+    @keyframes pulse-subtle {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+    }
+
+    .pulse-subtle {
+        animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Skeleton Loading */
+    @keyframes shimmer {
+        0% { background-position: -1000px 0; }
+        100% { background-position: 1000px 0; }
+    }
+
+    .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 1000px 100%;
+        animation: shimmer 2s infinite;
+    }
+</style>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -43,9 +104,15 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main x-data 
+                x-init="$nextTick(() => { setTimeout(() => { document.body.classList.add('loaded') }, 10) })"
+                class="transition-opacity duration-300">
                 {{ $slot }}
             </main>
         </div>
+                <!-- Toast Notifications -->
+        <x-toast />
+
+        @stack('scripts')
     </body>
 </html>

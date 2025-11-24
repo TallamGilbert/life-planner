@@ -22,11 +22,12 @@
             
             <!-- Success Message -->
             @if(session('success'))
-                <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
-                    {{ session('success') }}
-                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        showToast('{{ session('success') }}', 'success');
+                    });
+                </script>
             @endif
-
             <!-- Week Navigation -->
             <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
                 <div class="flex justify-between items-center">
