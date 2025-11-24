@@ -130,15 +130,13 @@
 
                         <!-- Submit Buttons -->
                         <div class="flex items-center justify-between pt-4 border-t">
-                            <form method="POST" action="{{ route('habits.destroy', $habit) }}" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" 
+                            <div>
+                                <button type="button" 
                                         class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
-                                        onclick="return confirm('Are you sure you want to delete this habit? This action cannot be undone.')">
+                                        onclick="return confirm('Are you sure you want to delete this habit? This action cannot be undone.') && document.getElementById('deleteForm').submit();">
                                     Delete Habit
                                 </button>
-                            </form>
+                            </div>
                             <div class="flex gap-4">
                                 <a href="{{ route('habits.index') }}" 
                                    class="px-4 py-2 text-gray-700 hover:text-gray-900">
@@ -150,6 +148,12 @@
                                 </button>
                             </div>
                         </div>
+                    </form>
+
+                    <!-- Delete Form (Separate, Hidden) -->
+                    <form id="deleteForm" method="POST" action="{{ route('habits.destroy', $habit) }}" style="display: none;">
+                        @csrf
+                        @method('DELETE')
                     </form>
                 </div>
             </div>
