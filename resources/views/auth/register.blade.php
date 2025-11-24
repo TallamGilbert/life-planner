@@ -16,194 +16,282 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #ffffffff 0%, #ffffffff 100%);
+            background-color: #f5f5f5;
             min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #ffffff;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        ::placeholder {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        .flex-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .flex-column > label {
+            color: #151717;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .inputForm {
+            border: 1.5px solid #ecedec;
+            border-radius: 10px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            transition: 0.2s ease-in-out;
+        }
+
+        .input {
+            margin-left: 10px;
+            border-radius: 10px;
+            border: none;
+            width: 100%;
+            height: 100%;
+            font-size: 14px;
+        }
+
+        .input:focus {
+            outline: none;
+        }
+
+        .inputForm:focus-within {
+            border: 1.5px solid #2d79f3;
+        }
+
+        .span {
+            font-size: 14px;
+            margin-left: 5px;
+            color: #2d79f3;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .span:hover {
+            text-decoration: underline;
+        }
+
+        .button-submit {
+            margin: 20px 0 10px 0;
+            background-color: #151717;
+            border: none;
+            color: white;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 10px;
+            height: 50px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+        }
+
+        .button-submit:hover {
+            background-color: #2d2e2f;
+        }
+
+        .p {
+            text-align: center;
+            color: black;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-section h1 {
+            color: #151717;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .logo-section p {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0 0 0;
+        }
+
+        .error-text {
+            color: #dc2626;
+            font-size: 13px;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .terms-checkbox input {
+            margin-top: 3px;
+            accent-color: #2d79f3;
+            cursor: pointer;
+        }
+
+        .terms-checkbox label {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .terms-checkbox a {
+            color: #2d79f3;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .form {
+                padding: 20px;
+                max-width: 100%;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
         }
     </style>
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen flex items-center justify-center p-4">
-        <div class="w-full max-w-md">
-            
-            <!-- Registration Form -->
-            <div class="glass-effect rounded-2xl p-8 md:p-12 fade-in-up">
-                
-                <!-- Logo -->
-                <div class="text-center mb-8">
-                    <h1 class="text-3xl font-bold gradient-text mb-2">Life Planner</h1>
-                    <p class="text-gray-600">Create your account to get started</p>
-                </div>
+        <form method="POST" action="{{ route('register') }}" class="form">
+            @csrf
 
-                <form method="POST" action="{{ route('register') }}" class="space-y-5">
-                    @csrf
-
-                    <!-- Name -->
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                            Full Name
-                        </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                            </div>
-                            <input id="name" 
-                                   type="text" 
-                                   name="name" 
-                                   value="{{ old('name') }}" 
-                                   required 
-                                   autofocus 
-                                   autocomplete="name"
-                                   class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
-                                   placeholder="John Doe">
-                        </div>
-                        @error('name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Email -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                            Email Address
-                        </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
-                                </svg>
-                            </div>
-                            <input id="email" 
-                                   type="email" 
-                                   name="email" 
-                                   value="{{ old('email') }}" 
-                                   required 
-                                   autocomplete="username"
-                                   class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
-                                   placeholder="you@example.com">
-                        </div>
-                        @error('email')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Password -->
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                            Password
-                        </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                                </svg>
-                            </div>
-                            <input id="password" 
-                                   type="password" 
-                                   name="password" 
-                                   required 
-                                   autocomplete="new-password"
-                                   class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
-                                   placeholder="••••••••">
-                        </div>
-                        @error('password')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Confirm Password -->
-                    <div>
-                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">
-                            Confirm Password
-                        </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <input id="password_confirmation" 
-                                   type="password" 
-                                   name="password_confirmation" 
-                                   required 
-                                   autocomplete="new-password"
-                                   class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
-                                   placeholder="••••••••">
-                        </div>
-                        @error('password_confirmation')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Terms -->
-                    <div class="flex items-start">
-                        <input id="terms" 
-                               type="checkbox" 
-                               required
-                               class="mt-1 rounded border-gray-300 text-purple-600 shadow-sm focus:ring-purple-500">
-                        <label for="terms" class="ml-2 text-sm text-gray-600">
-                            I agree to the <a href="#" class="text-purple-600 hover:text-purple-800">Terms of Service</a> and <a href="#" class="text-purple-600 hover:text-purple-800">Privacy Policy</a>
-                        </label>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" 
-                            class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-indigo-700 transform transition hover:scale-105 shadow-lg">
-                        Create Account
-                    </button>
-
-                    <!-- Divider -->
-                    <div class="relative my-6">
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t border-gray-300"></div>
-                        </div>
-                        <div class="relative flex justify-center text-sm">
-                            <span class="px-2 bg-white text-gray-500">Already have an account?</span>
-                        </div>
-                    </div>
-
-                    <!-- Login Link -->
-                    <a href="{{ route('login') }}" 
-                       class="block w-full text-center py-3 border-2 border-purple-600 text-purple-600 rounded-lg font-semibold hover:bg-purple-50 transition">
-                        Sign In
-                    </a>
-                </form>
+            <!-- Logo & Welcome -->
+            <div class="logo-section">
+                <h1>LifePlanner</h1>
+                <p>Create your account</p>
             </div>
 
-            <!-- Footer -->
-            <p class="text-center text-white/80 text-sm mt-6">
-                © 2024 Life Planner. All rights reserved.
-            </p>
-        </div>
+            <!-- Name -->
+            <div class="flex-column">
+                <label for="name">Full Name</label>
+                <div class="inputForm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24" height="20" fill="none" stroke="#666" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <input 
+                        id="name"
+                        placeholder="John Doe" 
+                        class="input" 
+                        type="text"
+                        name="name"
+                        value="{{ old('name') }}"
+                        required
+                        autofocus
+                        autocomplete="name">
+                </div>
+                @error('name')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Email Address -->
+            <div class="flex-column">
+                <label for="email">Email</label>
+                <div class="inputForm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 32 32" height="20">
+                        <g data-name="Layer 3" id="Layer_3">
+                            <path d="m30.853 13.87a15 15 0 0 0 -29.729 4.082 15.1 15.1 0 0 0 12.876 12.918 15.6 15.6 0 0 0 2.016.13 14.85 14.85 0 0 0 7.715-2.145 1 1 0 1 0 -1.031-1.711 13.007 13.007 0 1 1 5.458-6.529 2.149 2.149 0 0 1 -4.158-.759v-10.856a1 1 0 0 0 -2 0v1.726a8 8 0 1 0 .2 10.325 4.135 4.135 0 0 0 7.83.274 15.2 15.2 0 0 0 .823-7.455zm-14.853 8.13a6 6 0 1 1 6-6 6.006 6.006 0 0 1 -6 6z" fill="#666"></path>
+                        </g>
+                    </svg>
+                    <input 
+                        id="email"
+                        placeholder="you@example.com" 
+                        class="input" 
+                        type="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        required
+                        autocomplete="email">
+                </div>
+                @error('email')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Password -->
+            <div class="flex-column">
+                <label for="password">Password</label>
+                <div class="inputForm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="-64 0 512 512" height="20">
+                        <path d="m336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0"></path>
+                        <path d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0"></path>
+                    </svg>
+                    <input 
+                        id="password"
+                        placeholder="••••••••" 
+                        class="input" 
+                        type="password"
+                        name="password"
+                        required
+                        autocomplete="new-password">
+                </div>
+                @error('password')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="flex-column">
+                <label for="password_confirmation">Confirm Password</label>
+                <div class="inputForm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="-64 0 512 512" height="20">
+                        <path d="m336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0"></path>
+                        <path d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0"></path>
+                    </svg>
+                    <input 
+                        id="password_confirmation"
+                        placeholder="••••••••" 
+                        class="input" 
+                        type="password"
+                        name="password_confirmation"
+                        required
+                        autocomplete="new-password">
+                </div>
+                @error('password_confirmation')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div class="terms-checkbox">
+                <input id="agree-terms" name="agree_terms" type="checkbox" required>
+                <label for="agree-terms">
+                    I agree to the <a href="#">Terms & Conditions</a>
+                </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="button-submit">Create Account</button>
+
+            <!-- Sign In Link -->
+            <p class="p">Already have an account? <a href="{{ route('login') }}" class="span">Sign In</a></p>
+        </form>
     </div>
 </body>
 </html>

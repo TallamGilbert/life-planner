@@ -14,97 +14,198 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #ffffffff 0%, #ffffffff 100%);
+            background-color: #f5f5f5;
             min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #ffffff;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        ::placeholder {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .flex-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .flex-column > label {
+            color: #151717;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .inputForm {
+            border: 1.5px solid #ecedec;
+            border-radius: 10px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            transition: 0.2s ease-in-out;
+        }
+
+        .input {
+            margin-left: 10px;
+            border-radius: 10px;
+            border: none;
+            width: 100%;
+            height: 100%;
+            font-size: 14px;
+        }
+
+        .input:focus {
+            outline: none;
+        }
+
+        .inputForm:focus-within {
+            border: 1.5px solid #2d79f3;
+        }
+
+        .span {
+            font-size: 14px;
+            margin-left: 5px;
+            color: #2d79f3;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .span:hover {
+            text-decoration: underline;
+        }
+
+        .button-submit {
+            margin: 20px 0 10px 0;
+            background-color: #151717;
+            border: none;
+            color: white;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 10px;
+            height: 50px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+        }
+
+        .button-submit:hover {
+            background-color: #2d2e2f;
+        }
+
+        .p {
+            text-align: center;
+            color: black;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-section h1 {
+            color: #151717;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .logo-section p {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0 0 0;
+        }
+
+        .error-text {
+            color: #dc2626;
+            font-size: 13px;
+        }
+
+        .info-text {
+            color: #059669;
+            font-size: 13px;
+            background-color: #d1fae5;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .form {
+                padding: 20px;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen flex items-center justify-center p-4">
-        <div class="w-full max-w-md">
-            
-            <div class="glass-effect rounded-2xl p-8 md:p-12">
-                
-                <!-- Icon -->
-                <div class="flex justify-center mb-6">
-                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center">
-                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
-                        </svg>
-                    </div>
-                </div>
+        <form method="POST" action="{{ route('password.email') }}" class="form">
+            @csrf
 
-                <div class="text-center mb-8">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Forgot Password?</h2>
-                    <p class="text-gray-600 text-sm">
-                        No problem. Just let us know your email address and we'll send you a password reset link.
-                    </p>
-                </div>
-
-                <!-- Session Status -->
-                @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-green-600 bg-green-50 p-3 rounded-lg">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                <form method="POST" action="{{ route('password.email') }}" class="space-y-6">
-                    @csrf
-
-                    <!-- Email -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                            Email Address
-                        </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
-                                </svg>
-                            </div>
-                            <input id="email" 
-                                   type="email" 
-                                   name="email" 
-                                   value="{{ old('email') }}" 
-                                   required 
-                                   autofocus
-                                   class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
-                                   placeholder="you@example.com">
-                        </div>
-                        @error('email')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" 
-                            class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-indigo-700 transform transition hover:scale-105 shadow-lg">
-                        Send Reset Link
-                    </button>
-
-                    <!-- Back to Login -->
-                    <div class="text-center">
-                        <a href="{{ route('login') }}" 
-                           class="text-sm text-purple-600 hover:text-purple-800 font-medium">
-                            ← Back to Login
-                        </a>
-                    </div>
-                </form>
+            <!-- Logo & Welcome -->
+            <div class="logo-section">
+                <h1>LifePlanner</h1>
+                <p>Reset your password</p>
             </div>
-        </div>
+
+            <!-- Session Status -->
+            @if (session('status'))
+                <div class="info-text">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            <!-- Help Text -->
+            <p class="p" style="margin-top: 0; font-size: 13px; color: #666;">
+                No problem. Just let us know your email address and we'll send you a password reset link.
+            </p>
+
+            <!-- Email Address -->
+            <div class="flex-column">
+                <label for="email">Email</label>
+                <div class="inputForm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 32 32" height="20">
+                        <g data-name="Layer 3" id="Layer_3">
+                            <path d="m30.853 13.87a15 15 0 0 0 -29.729 4.082 15.1 15.1 0 0 0 12.876 12.918 15.6 15.6 0 0 0 2.016.13 14.85 14.85 0 0 0 7.715-2.145 1 1 0 1 0 -1.031-1.711 13.007 13.007 0 1 1 5.458-6.529 2.149 2.149 0 0 1 -4.158-.759v-10.856a1 1 0 0 0 -2 0v1.726a8 8 0 1 0 .2 10.325 4.135 4.135 0 0 0 7.83.274 15.2 15.2 0 0 0 .823-7.455zm-14.853 8.13a6 6 0 1 1 6-6 6.006 6.006 0 0 1 -6 6z" fill="#666"></path>
+                        </g>
+                    </svg>
+                    <input 
+                        id="email"
+                        placeholder="you@example.com" 
+                        class="input" 
+                        type="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        required
+                        autofocus
+                        autocomplete="email">
+                </div>
+                @error('email')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="button-submit">Send Reset Link</button>
+
+            <!-- Back to Login Link -->
+            <p class="p">Remember your password? <a href="{{ route('login') }}" class="span">Sign In</a></p>
+        </form>
     </div>
 </body>
 </html>

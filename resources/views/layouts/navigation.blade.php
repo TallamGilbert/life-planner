@@ -66,17 +66,17 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
-                            @if (auth()->user()->avatar_url)
+                            @if (auth()->user()->profile_picture_path)
                                 <img class="h-9 w-9 rounded-full object-cover" 
-                                     src="{{ auth()->user()->avatar_url }}" 
+                                     src="{{ Storage::url(auth()->user()->profile_picture_path) }}" 
                                      alt="{{ auth()->user()->name }}">
                             @else
-                                <div class="h-9 w-9 rounded-full bg-indigo-600 flex items-center justify-center text-white font-medium text-sm">
-                                    {{ Str::substr(auth()->user()->name, 0, 2) }}
+                                <div class="h-9 w-9 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-medium text-sm">
+                                    {{ Str::substr(auth()->user()->name, 0, 1) }}
                                 </div>
                             @endif
                         </button>
-                    </x-slot>
+                    </x-slot>>
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
@@ -133,11 +133,11 @@
         <!-- Mobile user menu -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4 flex items-center">
-                @if (auth()->user()->avatar_url)
-                    <img class="h-10 w-10 rounded-full object-cover" src="{{ auth()->user()->avatar_url }}" alt="">
+                @if (auth()->user()->profile_picture_path)
+                    <img class="h-10 w-10 rounded-full object-cover" src="{{ Storage::url(auth()->user()->profile_picture_path) }}" alt="">
                 @else
-                    <div class="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-medium">
-                        {{ Str::substr(auth()->user()->name, 0, 2) }}
+                    <div class="h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-medium">
+                        {{ Str::substr(auth()->user()->name, 0, 1) }}
                     </div>
                 @endif
                 <div class="ml-3">
