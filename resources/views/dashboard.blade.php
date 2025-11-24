@@ -9,10 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h3 class="text-2xl font-bold mb-4">Welcome back, {{ auth()->user()->name }}! 👋</h3>
+                    <h3 class="text-2xl font-bold mb-4">Welcome back, {{ auth()->user()->name }} </h3>
                     
                     <!-- Dashboard Overview Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
                         <!-- Budget Card -->
                         <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
                             <div class="flex items-center justify-between">
@@ -26,14 +26,14 @@
                                 $totalExpenses = auth()->user()->expenses()->where('type', 'expense')->sum('amount');
                                 $balance = $totalIncome - $totalExpenses;
                             @endphp
-                            <p class="text-3xl font-bold text-blue-600 mt-2">${{ number_format($balance, 2) }}</p>
+                            <p class="text-3xl font-bold text-blue-600 mt-2">Ksh {{ number_format($balance, 2) }}</p>
                             <p class="text-sm text-gray-600 mt-2">Current balance</p>
                             <div class="mt-3 pt-3 border-t border-blue-200">
                                 <p class="text-xs text-gray-500">
-                                    <span class="text-green-600 font-semibold">↑ ${{ number_format($totalIncome, 2) }}</span> Income
+                                    <span class="text-green-600 font-semibold">↑ Ksh {{ number_format($totalIncome, 2) }}</span> Income
                                 </p>
                                 <p class="text-xs text-gray-500">
-                                    <span class="text-red-600 font-semibold">↓ ${{ number_format($totalExpenses, 2) }}</span> Expenses
+                                    <span class="text-red-600 font-semibold">↓ Ksh {{ number_format($totalExpenses, 2) }}</span> Expenses
                                 </p>
                             </div>
                         </div>
@@ -90,29 +90,55 @@
                                 </p>
                             </div>
                         </div>
+
+                        <!-- Bills Card -->
+                        <div class="bg-orange-50 p-6 rounded-lg border border-orange-200">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-lg font-semibold text-orange-900">Bills</h4>
+                                <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            @php
+                                $activeBills = auth()->user()->bills()->where('is_active', true)->get();
+                                $activeBillsCount = $activeBills->count();
+                                $totalOwed = $activeBills->sum(function($bill) {
+                                    return $bill->total_amount - $bill->paid_amount;
+                                });
+                            @endphp
+                            <p class="text-3xl font-bold text-orange-600 mt-2">{{ $activeBillsCount }}</p>
+                            <p class="text-sm text-gray-600 mt-2">Active bills</p>
+                            <div class="mt-3 pt-3 border-t border-orange-200">
+                                <p class="text-xs text-gray-500">
+                                    Total owed: <span class="font-semibold">Ksh {{ number_format($totalOwed, 2) }}</span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
+                    
                     
                     <!-- Quick Actions -->
                     <div class="mt-8">
                         <h4 class="text-lg font-semibold mb-4">Quick Actions</h4>
                         <div class="flex flex-wrap gap-4">
-                            <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                </svg>
-                                Add Expense
-                            </a>
-                            <a href="{{ route('expenses.create') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Check-in Habit
-                            </a>
-                            <a href="#" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                Plan Meal
+                                <a href="{{ route('expenses.index') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Add Expenses
+                                </a>
+                                <a href="{{ route('habits.index') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Check-in Habit
+                                </a>
+                            <a href="{{ route('meals.index') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Plan Meal
                             </a>
                         </div>
                     </div>
@@ -132,7 +158,7 @@
                                             </p>
                                         </div>
                                         <p class="font-bold {{ $expense->type === 'income' ? 'text-green-600' : 'text-red-600' }}">
-                                            {{ $expense->type === 'income' ? '+' : '-' }}${{ number_format($expense->amount, 2) }}
+                                            {{ $expense->type === 'income' ? '+' : '-' }}Ksh {{ number_format($expense->amount, 2) }}
                                         </p>
                                     </div>
                                 @empty
@@ -163,6 +189,51 @@
                                 @endforelse
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Upcoming Bill Payments -->
+                    @php
+                        $upcomingBills = auth()->user()->bills()
+                            ->where('is_active', true)
+                            ->where('next_due_date', '<=', now()->addDays(7))
+                            ->orderBy('next_due_date')
+                            ->take(3)
+                            ->get();
+                    @endphp
+
+                    @if($upcomingBills->count() > 0)
+                        <div class="mt-8">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-lg font-semibold">Upcoming Bill Payments</h4>
+                                <a href="{{ route('bills.index') }}" class="text-sm text-blue-600 hover:text-blue-800">
+                                    View All →
+                                </a>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-sm p-4">
+                                @foreach($upcomingBills as $bill)
+                                    <div class="flex justify-between items-center py-3 border-b last:border-b-0">
+                                        <div class="flex-1">
+                                            <p class="font-medium text-gray-900">{{ $bill->name }}</p>
+                                            <p class="text-sm text-gray-500">
+                                                Ksh {{ number_format($bill->installment_amount, 2) }} • 
+                                                Due {{ $bill->next_due_date->format('M d') }}
+                                                @if($bill->is_overdue)
+                                                    <span class="text-red-600 font-semibold">• OVERDUE</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                        <a href="{{ route('bills.show', $bill) }}" 
+                                           class="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700">
+                                            Pay
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
+
+
                     </div>
                 </div>
             </div>

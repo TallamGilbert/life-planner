@@ -31,18 +31,18 @@
 
                 <div class="bg-white p-6 rounded-lg shadow-sm">
                     <p class="text-sm text-gray-600">Total Income</p>
-                    <p class="text-2xl font-bold text-green-600">${{ number_format($totalIncome, 2) }}</p>
+                    <p class="text-2xl font-bold text-green-600">Ksh {{ number_format($totalIncome, 2) }}</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-sm">
                     <p class="text-sm text-gray-600">Total Expenses</p>
-                    <p class="text-2xl font-bold text-red-600">${{ number_format($totalExpenses, 2) }}</p>
+                    <p class="text-2xl font-bold text-red-600">Ksh {{ number_format($totalExpenses, 2) }}</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-sm">
                     <p class="text-sm text-gray-600">Balance</p>
                     <p class="text-2xl font-bold {{ $balance >= 0 ? 'text-blue-600' : 'text-red-600' }}">
-                        ${{ number_format($balance, 2) }}
+                        Ksh {{ number_format($balance, 2) }}
                     </p>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                                     
                                     <div class="flex items-center gap-4">
                                         <p class="text-lg font-bold {{ $expense->type === 'income' ? 'text-green-600' : 'text-red-600' }}">
-                                            {{ $expense->type === 'income' ? '+' : '-' }}${{ number_format($expense->amount, 2) }}
+                                            {{ $expense->type === 'income' ? '+' : '-' }}Ksh {{ number_format($expense->amount, 2) }}
                                         </p>
                                         
                                         <div class="flex gap-2">

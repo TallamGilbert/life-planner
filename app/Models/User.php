@@ -45,6 +45,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     /**
      * Get all expenses for the user
      */
@@ -67,5 +68,21 @@ class User extends Authenticatable
     public function meals()
     {
         return $this->hasMany(Meal::class);
+    }
+
+    /**
+     * Get all bills for the user
+     */
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
+    }
+
+    /**
+     * Get all bill payments for the user
+     */
+    public function billPayments()
+    {
+        return $this->hasMany(BillPayment::class);
     }
 }
