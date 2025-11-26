@@ -3,254 +3,288 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Life Planner - Manage Your Life with Ease</title>
+        <title>Life Planner</title>
+        
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=figtree:300,400,500,600,700&display=swap" rel="stylesheet" />
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
         <style>
+            :root {
+                --text-primary: #111827;
+                --text-secondary: #6b7280;
+                --bg-primary: #ffffff;
+                --bg-secondary: #f9fafb;
+                --accent: #111827; /* Solid Black for minimal look */
+                --accent-hover: #374151;
+            }
+
             body {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                min-height: 100vh;
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                margin: 0;
+                font-family: 'Figtree', sans-serif;
+                background-color: var(--bg-primary);
+                color: var(--text-primary);
+                line-height: 1.5;
+                -webkit-font-smoothing: antialiased;
             }
 
-            .container {
+            /* Navbar */
+            .nav {
                 display: flex;
-                flex-direction: column;
+                justify-content: space-between;
                 align-items: center;
-                justify-content: center;
-                min-height: 100vh;
-                padding: 20px;
-            }
-
-            .content {
-                background: white;
-                border-radius: 20px;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-                padding: 60px 40px;
-                max-width: 600px;
-                text-align: center;
-                animation: slideIn 0.6s ease-out;
-            }
-
-            @keyframes slideIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+                padding: 24px 40px;
+                max-width: 1200px;
+                margin: 0 auto;
             }
 
             .logo {
-                font-size: 48px;
                 font-weight: 700;
-                color: #667eea;
-                margin-bottom: 20px;
+                font-size: 20px;
+                letter-spacing: -0.5px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                color: var(--text-primary);
+            }
+
+            .nav-links a {
+                color: var(--text-secondary);
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+                margin-left: 24px;
+                transition: color 0.2s ease;
+            }
+
+            .nav-links a:hover {
+                color: var(--text-primary);
+            }
+
+            .nav-links .btn-login {
+                color: var(--text-primary);
+            }
+
+            /* Main Hero */
+            .hero {
+                max-width: 800px;
+                margin: 100px auto 60px;
+                padding: 0 24px;
+                text-align: center;
+                animation: fadeIn 0.8s ease-out;
             }
 
             h1 {
-                font-size: 36px;
-                color: #1a1a1a;
-                margin-bottom: 15px;
-                font-weight: 700;
+                font-size: 56px;
+                line-height: 1.1;
+                font-weight: 800;
+                letter-spacing: -1.5px;
+                margin-bottom: 24px;
+                background: linear-gradient(to right, #000 20%, #555 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
             .subtitle {
-                font-size: 18px;
-                color: #666;
-                margin-bottom: 30px;
-                line-height: 1.6;
+                font-size: 20px;
+                color: var(--text-secondary);
+                max-width: 500px;
+                margin: 0 auto 40px;
+                font-weight: 300;
             }
 
-            .features {
+            /* Buttons */
+            .cta-group {
+                display: flex;
+                gap: 16px;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .btn {
+                padding: 12px 28px;
+                border-radius: 50px;
+                font-weight: 600;
+                font-size: 15px;
+                text-decoration: none;
+                transition: all 0.2s ease;
+            }
+
+            .btn-primary {
+                background: var(--accent);
+                color: white;
+                border: 1px solid var(--accent);
+            }
+
+            .btn-primary:hover {
+                background: var(--accent-hover);
+                border-color: var(--accent-hover);
+                transform: translateY(-1px);
+            }
+
+            .btn-outline {
+                background: transparent;
+                color: var(--text-primary);
+                border: 1px solid #e5e7eb;
+            }
+
+            .btn-outline:hover {
+                border-color: var(--text-primary);
+                background: var(--bg-secondary);
+            }
+
+            /* Grid Features */
+            .grid-section {
+                background: var(--bg-secondary);
+                padding: 80px 24px;
+                margin-top: 80px;
+                border-top: 1px solid #f3f4f6;
+            }
+
+            .grid-container {
+                max-width: 1000px;
+                margin: 0 auto;
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 20px;
-                margin: 40px 0;
-                text-align: left;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 40px;
             }
 
-            .feature {
-                padding: 20px;
-                background: #f8f9ff;
-                border-radius: 12px;
-                border-left: 4px solid #667eea;
+            .feature-item {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
             }
 
-            .feature-icon {
-                font-size: 28px;
-                margin-bottom: 10px;
+            .icon-box {
+                width: 40px;
+                height: 40px;
+                background: white;
+                border: 1px solid #e5e7eb;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 16px;
+                color: var(--text-primary);
             }
 
             .feature-title {
                 font-weight: 600;
-                color: #1a1a1a;
-                margin-bottom: 5px;
+                font-size: 16px;
+                margin-bottom: 8px;
+                color: var(--text-primary);
             }
 
             .feature-desc {
-                font-size: 13px;
-                color: #666;
+                font-size: 14px;
+                color: var(--text-secondary);
+                line-height: 1.6;
             }
 
-            .buttons {
-                display: flex;
-                gap: 15px;
-                justify-content: center;
-                margin-top: 40px;
-                flex-wrap: wrap;
+            /* Animation */
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
             }
 
-            .btn {
-                padding: 14px 32px;
-                border: none;
-                border-radius: 10px;
-                font-size: 16px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                text-decoration: none;
-                display: inline-block;
-            }
-
-            .btn-primary {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-            }
-
-            .btn-primary:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            }
-
-            .btn-secondary {
-                background: white;
-                color: #667eea;
-                border: 2px solid #667eea;
-            }
-
-            .btn-secondary:hover {
-                background: #f8f9ff;
-                transform: translateY(-2px);
-            }
-
-            .nav {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                display: flex;
-                gap: 15px;
-            }
-
-            .nav a {
-                padding: 10px 20px;
-                background: rgba(255, 255, 255, 0.2);
-                color: white;
-                border-radius: 8px;
-                text-decoration: none;
-                font-weight: 500;
-                transition: all 0.3s ease;
-                border: 1px solid rgba(255, 255, 255, 0.3);
-            }
-
-            .nav a:hover {
-                background: white;
-                color: #667eea;
-            }
-
-            @media (max-width: 600px) {
-                .content {
-                    padding: 40px 20px;
-                }
-
-                h1 {
-                    font-size: 28px;
-                }
-
-                .logo {
-                    font-size: 36px;
-                }
-
-                .features {
-                    grid-template-columns: 1fr;
-                }
-
-                .buttons {
-                    flex-direction: column;
-                }
-
-                .btn {
-                    width: 100%;
-                    box-sizing: border-box;
-                }
-
-                .nav {
-                    position: static;
-                    justify-content: center;
-                    margin-bottom: 20px;
-                }
+            /* Mobile */
+            @media (max-width: 640px) {
+                h1 { font-size: 40px; }
+                .nav { padding: 20px; }
+                .hero { margin-top: 60px; }
+                .grid-container { grid-template-columns: 1fr; gap: 30px; }
             }
         </style>
     </head>
     <body>
-        <div class="nav">
-            @if (Route::has('login'))
-                @auth
-                    <a href="{{ url('/dashboard') }}">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}">Log In</a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}">Register</a>
-                    @endif
-                @endauth
-            @endif
-        </div>
+        
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                LifePlanner
+            </a>
+            <div class="nav-links">
+                @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="btn-login">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn-login">Log in</a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}">Sign up</a>
+                        @endif
+                    @endauth
+                @endif
+            </div>
+        </nav>
 
-        <div class="container">
-            <div class="content">
-                <div class="logo">📋</div>
-                <h1>Life Planner</h1>
-                <p class="subtitle">Take control of your life. Track expenses, build habits, plan meals, and manage bills—all in one place.</p>
+        <!-- Hero Section -->
+        <main class="hero">
+            <h1>Structure your life,<br>effortlessly.</h1>
+            <p class="subtitle">
+                The all-in-one minimal workspace for your finances, habits, meals, and bills. 
+                Focus on living, not just planning.
+            </p>
+            
+            <div class="cta-group">
+                @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+                    @else
+                        <a href="{{ route('register') }}" class="btn btn-primary">Get Started</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline">Log In</a>
+                    @endauth
+                @endif
+            </div>
+        </main>
 
-                <div class="features">
-                    <div class="feature">
-                        <div class="feature-icon">💰</div>
-                        <div class="feature-title">Expenses</div>
-                        <div class="feature-desc">Track spending easily</div>
+        <!-- Minimal Feature Grid -->
+        <div class="grid-section">
+            <div class="grid-container">
+                <!-- Feature 1 -->
+                <div class="feature-item">
+                    <div class="icon-box">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                     </div>
-                    <div class="feature">
-                        <div class="feature-icon">🔥</div>
-                        <div class="feature-title">Habits</div>
-                        <div class="feature-desc">Build streaks & goals</div>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">🍽️</div>
-                        <div class="feature-title">Meals</div>
-                        <div class="feature-desc">Plan & organize meals</div>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">📊</div>
-                        <div class="feature-title">Bills</div>
-                        <div class="feature-desc">Never miss a payment</div>
-                    </div>
+                    <div class="feature-title">Expenses</div>
+                    <div class="feature-desc">Track every penny with zero clutter. Visualize where your money goes.</div>
                 </div>
 
-                <div class="buttons">
-                    @if (Route::has('login'))
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}" class="btn btn-primary">Get Started</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="btn btn-secondary">Create Account</a>
-                            @endif
-                        @endauth
-                    @endif
+                <!-- Feature 2 -->
+                <div class="feature-item">
+                    <div class="icon-box">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    </div>
+                    <div class="feature-title">Habits</div>
+                    <div class="feature-desc">Build consistency. Simple streak tracking to keep you motivated daily.</div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-item">
+                    <div class="icon-box">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div class="feature-title">Bill Tracker</div>
+                    <div class="feature-desc">Never miss a due date. See upcoming payments at a glance.</div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-item">
+                    <div class="icon-box">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                    </div>
+                    <div class="feature-title">Meal Plans</div>
+                    <div class="feature-desc">Organize your weekly menu and generate shopping lists automatically.</div>
                 </div>
             </div>
         </div>
+
     </body>
 </html>

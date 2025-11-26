@@ -82,7 +82,7 @@
                                 Amount *
                             </label>
                             <div class="relative">
-                                <span class="absolute left-3 top-3 text-gray-500">$</span>
+                                <span class="absolute left-3 top-3 text-gray-500">Ksh </span>
                                 <input type="number" 
                                        name="amount" 
                                        id="amount" 
