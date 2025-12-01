@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -22,6 +20,9 @@ class User extends Authenticatable
         'email',
         'password',
         'profile_picture_path',
+        'is_demo',
+        'demo_expires_at',
+        'is_admin',
     ];
 
     /**
@@ -39,13 +40,13 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'is_demo' => 'boolean',
+        'demo_expires_at' => 'datetime',
+        'is_admin' => 'boolean',
+    ];
 
     /**
      * Get all expenses for the user
@@ -80,10 +81,43 @@ class User extends Authenticatable
     }
 
     /**
+ * Check if user is admin
+        */
+        public function isAdmin()
+        {
+            return $this->is_admin;
+        }
+
+    /**
      * Get all bill payments for the user
      */
     public function billPayments()
     {
         return $this->hasMany(BillPayment::class);
     }
+
+    /**
+     * Check if demo session is expired
+     */
+    public function isDemoExpired()
+    {
+        return $this->is_demo && $this->demo_expires_at && now()->greaterThan($this->demo_expires_at);
+    }
+
+    /**
+     * Get remaining demo time in minutes
+     */
+public function getDemoTimeRemaining()
+{
+    if (!$this->is_demo || !$this->demo_expires_at) {
+        return 0;
+    }
+
+    $seconds = now()->diffInSeconds($this->demo_expires_at, false);
+
+    $minutes = $seconds / 60;
+
+    return $minutes > 0 ? $minutes : 0;
+}
+
 }

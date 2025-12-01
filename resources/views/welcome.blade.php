@@ -202,15 +202,33 @@
         
         <!-- Navigation -->
         <nav class="nav">
-            <a href="/" class="logo">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
-                LifePlanner
-            </a>
+                            <!-- Logo -->
+                <div class="shrink-0 flex items-center">
+                    <a href="{{ route('dashboard') }}" class="group flex items-center space-x-3 transition opacity-90 hover:opacity-100">
+                        <svg class="h-9 w-auto" width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Icon Group -->
+                            <g class="transition-transform group-hover:scale-105 duration-200 origin-center">
+                                <!-- Accent Circle -->
+                                <circle cx="14" cy="14" r="14" fill="#111827" opacity="0.05"/>
+                                <circle cx="14" cy="14" r="9" fill="#111827"/>
+                                
+                                <!-- Icon Path (White checkmark/calendar) -->
+                                <g transform="translate(4,4)">
+                                    <rect x="4" y="4" width="20" height="20" rx="4" stroke="white" stroke-width="2.5" fill="none"/>
+                                    <path d="M8 10 L16 18 L24 6" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                </g>
+                            </g>
+
+                            <!-- Text -->
+                            <text x="36" y="25"
+                                font-family="system-ui, -apple-system, sans-serif"
+                                font-size="22" font-weight="800"
+                                fill="#111827">
+                                LifePlanner.
+                            </text>
+                        </svg>
+                    </a>
+                </div>
             <div class="nav-links">
                 @if (Route::has('login'))
                     @auth
@@ -219,6 +237,9 @@
                         <a href="{{ route('login') }}" class="btn-login">Log in</a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Sign up</a>
+                            @if (Route::has ('demo.start'))
+                                <a href="{{ route('demo.start') }}" class = "btn btn-outline">Try Demo</a>
+                            @endif
                         @endif
                     @endauth
                 @endif
@@ -288,3 +309,7 @@
 
     </body>
 </html>
+
+
+
+

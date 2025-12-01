@@ -10,9 +10,16 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\IsAdmin::class,
+        ]);
+        
+        $middleware->web(append: [
+            \App\Http\Middleware\CheckDemoExpiry::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
         //
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
-        //
-    })->create();
+    ->create();
