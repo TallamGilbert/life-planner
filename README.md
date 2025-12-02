@@ -2,10 +2,11 @@
 
 A comprehensive Laravel-based web application designed to help users manage their finances, track habits, plan meals, and monitor bills in one centralized platform.
 
-![Version](https://img.shields.io/badge/version-1.1.0-blue)
+![Version](https://img.shields.io/badge/version-1.2.0-blue)
 ![Laravel](https://img.shields.io/badge/Laravel-12-red)
 ![PHP](https://img.shields.io/badge/PHP-8.2+-purple)
 ![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-Production%20Ready-brightgreen)
 
 ## 🎯 Features
 
@@ -62,6 +63,25 @@ A comprehensive Laravel-based web application designed to help users manage thei
 - **User Authorization**: Proper user ownership verification for all data
 - **Session Management**: Database-backed secure session storage
 
+## ✨ Recent Updates (v1.2.0)
+
+### 🐛 Critical Bug Fixes
+- **Fixed ActivityLog Auth Method**: Corrected `auth()->id()` to `auth()->user()?->id` for proper user ID retrieval
+- **Improved JavaScript Event Handlers**: Refactored onclick handlers to use data attributes instead of inline Blade variables
+  - Activity log "View Details" now uses clean data attribute passing
+  - User delete confirmation now uses data attributes for better maintainability
+- **Enhanced Chart.js Integration**: Fixed Blade directive placement in JavaScript for Chart.js initialization
+
+### 📈 Code Quality Improvements
+- Better separation of concerns between templates and JavaScript
+- Improved error handling with null-safe operators
+- Enhanced maintainability through cleaner data passing mechanisms
+- Comprehensive test coverage for admin functions
+
+### 📊 Documentation
+- Added detailed error analysis and fix documentation
+- Improved code comments and docstrings
+- Created implementation guides for future developers
 ## 🛠️ Technology Stack
 
 - **Framework**: Laravel 12 (PHP 8.2+)
@@ -72,6 +92,33 @@ A comprehensive Laravel-based web application designed to help users manage thei
 - **Charts**: Chart.js for data visualization
 - **Validation**: Form Request validation
 - **Storage**: Disk-based file storage with public access
+
+## 👨‍💼 Admin Features
+
+### 📊 System Analytics Dashboard
+- **User Growth Tracking**: Monthly registration trends with visual charts
+- **Expense Distribution**: Category-wise spending breakdown
+- **Habit Popularity**: Most active habit categories among all users
+- **Real-time Metrics**: Key performance indicators and statistics
+
+### 👥 User Management
+- **User Directory**: Browse all registered users with detailed information
+- **User Details**: View individual user activity and associated data
+- **Admin Controls**: Grant/revoke admin privileges
+- **User Deletion**: Remove users and associated data from system
+- **User Filtering**: Filter by user status (Admin, Demo, Verified)
+
+### 📋 Activity Logging
+- **Complete Audit Trail**: Track all system activities and changes
+- **Action Logging**: View what, when, and who performed actions
+- **IP Tracking**: Monitor access from different IP addresses
+- **Search & Filter**: Find specific activities across the audit log
+- **Log Details**: View detailed metadata for each activity entry
+
+### ⚙️ System Settings
+- **Configuration Management**: Manage application settings
+- **System Preferences**: Customize application behavior
+- **Settings Persistence**: Settings cached for optimal performance
 
 ## 📋 Database Schema
 
@@ -653,8 +700,8 @@ This project is licensed under the MIT License - see LICENSE file for details.
 ---
 
 **Project Status**: ✅ Active Development  
-**Last Updated**: November 24, 2025  
-**Version**: 1.1.0  
+**Last Updated**: December 2, 2025  
+**Version**: 1.2.0  
 **PHP Version**: 8.2+  
 **Laravel Version**: 12  
 
