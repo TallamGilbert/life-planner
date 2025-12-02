@@ -70,6 +70,16 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/users/{user}/make-admin', [App\Http\Controllers\Admin\AdminController::class, 'makeAdmin'])->name('users.make-admin');
     Route::post('/users/{user}/remove-admin', [App\Http\Controllers\Admin\AdminController::class, 'removeAdmin'])->name('users.remove-admin');
     Route::get('/stats', [App\Http\Controllers\Admin\AdminController::class, 'stats'])->name('stats');
+
+      // Activity Logs
+    Route::get('/logs', [App\Http\Controllers\Admin\ActivityLogController::class, 'index'])->name('logs');
+    Route::get('/logs/{log}', [App\Http\Controllers\Admin\ActivityLogController::class, 'show'])->name('logs.show');
+    Route::delete('/logs/{log}', [App\Http\Controllers\Admin\ActivityLogController::class, 'destroy'])->name('logs.delete');
+    Route::post('/logs/clear', [App\Http\Controllers\Admin\ActivityLogController::class, 'clear'])->name('logs.clear');
+    
+    // Settings
+    Route::get('/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('settings');
+    Route::post('/settings', [App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('settings.update');
 });
 });
 
