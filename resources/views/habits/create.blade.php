@@ -88,7 +88,7 @@
 
                     <!-- Subtle Tips Section -->
                     <div class="flex gap-3 items-start p-4 bg-gray-50 rounded-lg border border-gray-100">
-                        <span class="text-lg">💡</span>
+                        <span class="text-lg"></span>
                         <div>
                             <p class="text-sm font-medium text-gray-900">Tips for Success</p>
                             <ul class="text-xs text-gray-500 mt-1 space-y-1 list-disc list-inside">

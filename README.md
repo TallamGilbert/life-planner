@@ -708,6 +708,3 @@ This project is licensed under the MIT License - see LICENSE file for details.
 **Roadmap**: Check GitHub Projects board for planned features and timeline.
 
 
-git add .
-git commit -m "Updated the readme file "
-git push

@@ -132,7 +132,7 @@
                                 
                                 <div class="flex items-center gap-4 mt-2 mb-4">
                                     <div class="flex items-center gap-1.5">
-                                        <span class="text-orange-500">🔥</span>
+                                        <span class="text-orange-500"></span>
                                         <span class="text-sm font-bold text-gray-900">{{ $habit->streak }}</span>
                                     </div>
                                     <div class="text-xs text-gray-400">
