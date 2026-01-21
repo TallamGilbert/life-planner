@@ -22,7 +22,7 @@ class Habit extends Model
     ];
 
     protected $casts = [
-        'last_completed' => 'date',
+        'last_completed' => 'datetime',
         'is_active' => 'boolean',
     ];
 
