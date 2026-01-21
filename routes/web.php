@@ -81,22 +81,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('settings');
     Route::post('/settings', [App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('settings.update');
 
-
-    // Make me admin route for testing
-
-    Route::get('/make-me-admin/{email}', function ($email) {
-    $user = \App\Models\User::where('email', $email)->first();
     
-    if ($user) {
-        $user->is_admin = true;
-        $user->save();
-        return "User {$email} is now an admin!";
-    }
-    
-    return "User not found!";
-});
-
-
 });
 });
 
