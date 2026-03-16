@@ -60,10 +60,7 @@ class HabitController extends Controller
      */
     public function checkin(Habit $habit)
     {
-        // Make sure user owns this habit
-        if ($habit->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('update', $habit);
 
         $today = Carbon::today();
         $lastCompleted = $habit->last_completed ? Carbon::parse($habit->last_completed) : null;
@@ -104,10 +101,7 @@ class HabitController extends Controller
      */
     public function edit(Habit $habit)
     {
-        // Make sure user owns this habit
-        if ($habit->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('update', $habit);
 
         return view('habits.edit', compact('habit'));
     }
@@ -117,10 +111,7 @@ class HabitController extends Controller
      */
     public function update(Request $request, Habit $habit)
     {
-        // Make sure user owns this habit
-        if ($habit->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('update', $habit);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -140,10 +131,7 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
-        // Make sure user owns this habit
-        if ($habit->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('delete', $habit);
 
         $habit->delete();
 
@@ -156,10 +144,7 @@ class HabitController extends Controller
      */
     public function archive(Habit $habit)
     {
-        // Make sure user owns this habit
-        if ($habit->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('update', $habit);
 
         $habit->is_active = false;
         $habit->save();

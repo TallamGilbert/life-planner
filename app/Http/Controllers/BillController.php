@@ -79,10 +79,7 @@ class BillController extends Controller
      */
     public function show(Bill $bill)
     {
-        // Make sure user owns this bill
-        if ($bill->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('view', $bill);
 
         $payments = $bill->payments()->latest()->get();
 
@@ -94,10 +91,7 @@ class BillController extends Controller
      */
     public function recordPayment(Request $request, Bill $bill)
     {
-        // Make sure user owns this bill
-        if ($bill->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('update', $bill);
 
         $validated = $request->validate([
             'amount' => 'required|numeric|min:0.01',
@@ -154,10 +148,7 @@ class BillController extends Controller
      */
     public function edit(Bill $bill)
     {
-        // Make sure user owns this bill
-        if ($bill->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('update', $bill);
 
         return view('bills.edit', compact('bill'));
     }
@@ -167,10 +158,7 @@ class BillController extends Controller
      */
     public function update(Request $request, Bill $bill)
     {
-        // Make sure user owns this bill
-        if ($bill->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('update', $bill);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -189,10 +177,7 @@ class BillController extends Controller
      */
     public function destroy(Bill $bill)
     {
-        // Make sure user owns this bill
-        if ($bill->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('delete', $bill);
 
         $bill->delete();
 

@@ -65,10 +65,7 @@ class MealController extends Controller
      */
     public function edit(Meal $meal)
     {
-        // Make sure user owns this meal
-        if ($meal->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('update', $meal);
 
         return view('meals.edit', compact('meal'));
     }
@@ -78,10 +75,7 @@ class MealController extends Controller
      */
     public function update(Request $request, Meal $meal)
     {
-        // Make sure user owns this meal
-        if ($meal->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('update', $meal);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -103,10 +97,7 @@ class MealController extends Controller
      */
     public function destroy(Meal $meal)
     {
-        // Make sure user owns this meal
-        if ($meal->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $this->authorize('delete', $meal);
 
         $meal->delete();
 

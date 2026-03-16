@@ -52,10 +52,7 @@ class ExpenseController extends Controller
      */
     public function edit(Expense $expense)
     {
-        // Make sure user owns this expense
-        if ($expense->user_id !== auth()->id()) {
-            abort(403);
-        }
+        $this->authorize('update', $expense);
 
         return view('expenses.edit', compact('expense'));
     }
@@ -65,10 +62,7 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, Expense $expense)
     {
-        // Make sure user owns this expense
-        if ($expense->user_id !== auth()->id()) {
-            abort(403);
-        }
+        $this->authorize('update', $expense);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -90,10 +84,7 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        // Make sure user owns this expense
-        if ($expense->user_id !== auth()->id()) {
-            abort(403);
-        }
+        $this->authorize('delete', $expense);
 
         $expense->delete();
 
