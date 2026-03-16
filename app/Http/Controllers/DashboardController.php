@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user(); // get logged-in user
 
-        $budget = Expense::where('user_id', $user->id)->sum('amount');
+        $budget = Expense::where('user_id', $user->id)->where('type', 'expense')->sum('amount');
         $streaks = Habit::where('user_id', $user->id)->sum('streak');
         $meals = Meal::where('user_id', $user->id)
                      ->whereBetween('date', [now()->startOfWeek(), now()->endOfWeek()])
