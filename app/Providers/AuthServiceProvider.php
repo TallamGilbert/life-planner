@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Models\Bill;
 use App\Models\Expense;
 use App\Models\Meal;
@@ -29,3 +29,4 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
     }
 }
+
