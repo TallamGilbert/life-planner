@@ -66,22 +66,7 @@
                     
                     <!-- Preferences Tab Content -->
                     <div x-show="currentTab === 'preferences'" class="bg-white shadow sm:rounded-lg p-6">
-                        <h2 class="text-lg font-medium text-gray-900 mb-4">Application Preferences</h2>
-                        <!-- Example Preferences Form -->
-                        <form class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700">Timezone</label>
-                                <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                    <option>Africa/Nairobi</option>
-                                    <option>UTC</option>
-                                    <option>America/New_York</option>
-                                </select>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="notifications" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="notifications" class="ml-2 block text-sm text-gray-900">Receive email reminders</label>
-                            </div>
-                        </form>
+                        @include('profile.partials.update-preferences-form')
                     </div>
 
                 </div>

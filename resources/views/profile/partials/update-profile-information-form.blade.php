@@ -85,8 +85,8 @@
         <!-- Email Input -->
         <div>
             <x-input-label for="email" :value="__('Email')" class="text-gray-700 font-medium mb-2" />
-            <x-text-input id="email" name="email" type="email" 
-                class="w-full rounded-lg border-gray-200 focus:border-gray-900 focus:ring-gray-900 transition shadow-sm placeholder-gray-400" 
+            <x-text-input id="email" name="email" type="email"
+                class="w-full rounded-lg border-gray-200 focus:border-gray-900 focus:ring-gray-900 transition shadow-sm placeholder-gray-400"
                 :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
@@ -106,6 +106,34 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <!-- Bio Input -->
+        <div>
+            <x-input-label for="bio" :value="__('Bio')" class="text-gray-700 font-medium mb-2" />
+            <textarea id="bio" name="bio" rows="3"
+                class="w-full rounded-lg border-gray-200 focus:border-gray-900 focus:ring-gray-900 transition shadow-sm placeholder-gray-400"
+                placeholder="Tell us about yourself...">{{ old('bio', $user->bio) }}</textarea>
+            <p class="mt-1 text-xs text-gray-500">{{ strlen(old('bio', $user->bio ?? '')) }}/500 characters</p>
+            <x-input-error class="mt-2" :messages="$errors->get('bio')" />
+        </div>
+
+        <!-- Location Input -->
+        <div>
+            <x-input-label for="location" :value="__('Location')" class="text-gray-700 font-medium mb-2" />
+            <x-text-input id="location" name="location" type="text"
+                class="w-full rounded-lg border-gray-200 focus:border-gray-900 focus:ring-gray-900 transition shadow-sm placeholder-gray-400"
+                :value="old('location', $user->location)" placeholder="e.g., New York, USA" />
+            <x-input-error class="mt-2" :messages="$errors->get('location')" />
+        </div>
+
+        <!-- Phone Input -->
+        <div>
+            <x-input-label for="phone" :value="__('Phone')" class="text-gray-700 font-medium mb-2" />
+            <x-text-input id="phone" name="phone" type="tel"
+                class="w-full rounded-lg border-gray-200 focus:border-gray-900 focus:ring-gray-900 transition shadow-sm placeholder-gray-400"
+                :value="old('phone', $user->phone)" placeholder="+1234567890" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
         </div>
 
         <!-- Actions -->
