@@ -20,6 +20,9 @@ class User extends Authenticatable
         'email',
         'password',
         'profile_picture_path',
+        'bio',
+        'location',
+        'phone',
         'is_demo',
         'demo_expires_at',
         'is_admin',
@@ -119,5 +122,13 @@ public function getDemoTimeRemaining()
 
     return $minutes > 0 ? $minutes : 0;
 }
+
+    /**
+     * Get user preferences
+     */
+    public function preferences()
+    {
+        return $this->hasOne(UserPreference::class);
+    }
 
 }
