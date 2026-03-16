@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Expense;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseController extends Controller
 {
@@ -12,10 +13,10 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = auth()->user()->expenses()
+        $expenses = Auth::user()->expenses()
             ->orderBy('date', 'desc')
             ->paginate(20);
-        
+
         return view('expenses.index', compact('expenses'));
     }
 
@@ -41,7 +42,7 @@ class ExpenseController extends Controller
             'description' => 'nullable|string|max:1000',
         ]);
 
-        auth()->user()->expenses()->create($validated);
+        Auth::user()->expenses()->create($validated);
 
         return redirect()->route('expenses.index')
             ->with('success', 'Transaction added successfully!');
