@@ -17,18 +17,18 @@ class MealController extends Controller
         // Get current week's meals
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
-        
+
         $meals = Auth::user()->meals()
             ->whereBetween('date', [$startOfWeek, $endOfWeek])
             ->orderBy('date')
             ->orderBy('meal_type')
             ->get();
-        
+
         // Group meals by date and type
-        $mealsByDate = $meals->groupBy(function($meal) {
+        $mealsByDate = $meals->groupBy(function ($meal) {
             return $meal->date->format('Y-m-d');
         });
-        
+
         return view('meals.index', compact('mealsByDate', 'startOfWeek', 'endOfWeek'));
     }
 
@@ -112,12 +112,12 @@ class MealController extends Controller
     {
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
-        
+
         $meals = Auth::user()->meals()
             ->whereBetween('date', [$startOfWeek, $endOfWeek])
             ->whereNotNull('ingredients')
             ->get();
-        
+
         return view('meals.shopping-list', compact('meals', 'startOfWeek', 'endOfWeek'));
     }
 }

@@ -18,7 +18,7 @@ class HabitController extends Controller
             ->where('is_active', true)
             ->orderBy('created_at', 'desc')
             ->get();
-        
+
         return view('habits.index', compact('habits'));
     }
 
@@ -74,7 +74,7 @@ class HabitController extends Controller
         // Check if completed yesterday (continue streak)
         if ($lastCompleted && $lastCompleted->isYesterday()) {
             $habit->streak += 1;
-        } 
+        }
         // Check if completed today (shouldn't happen, but handle it)
         elseif ($lastCompleted && $lastCompleted->isToday()) {
             // Do nothing, already done today
